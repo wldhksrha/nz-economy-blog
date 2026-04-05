@@ -103,7 +103,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 /** Return all unique categories */
 export function getAllCategories(): string[] {
-  return [...new Set(getAllPosts().map(p => p.category))]
+  return Array.from(new Set(getAllPosts().map(p => p.category)))
 }
 
 /** Return posts filtered by category */
