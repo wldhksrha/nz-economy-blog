@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { SITE_CONFIG } from '@/lib/config'
 
