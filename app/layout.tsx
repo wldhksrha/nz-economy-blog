@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import './globals.css'
-import { SITE_CONFIG } from '@/lib/config'
+import "../app/globals.css"; // 또는 파일 위치에 따라 "@/app/globals.css"
+// import { SITE_CONFIG } from '@/lib/config'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Script from 'next/script'
@@ -76,8 +76,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className="min-h-screen flex flex-col bg-[#fafaf9]">
-        {/* Google Analytics */}
+<body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
+          {/* Google Analytics */}
         {SITE_CONFIG.googleAnalyticsId && (
           <>
             <Script
