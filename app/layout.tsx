@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import "../app/globals.css"; // 또는 파일 위치에 따라 "@/app/globals.css"
-// import { SITE_CONFIG } from '@/lib/config'
+import "./globals.css" 
+import { SITE_CONFIG } from '../lib/config' // 주석을 풀고 경로를 수정했습니다!
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Script from 'next/script'
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.author.name }],
   creator:  SITE_CONFIG.author.name,
 
-  // Open Graph
   openGraph: {
     type:        'website',
     locale:      'ko_KR',
@@ -34,19 +33,16 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.description,
   },
 
-  // Twitter Card
   twitter: {
     card:  'summary_large_image',
     title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
   },
 
-  // Google Search Console verification
   ...(SITE_CONFIG.googleVerification && {
     verification: { google: SITE_CONFIG.googleVerification },
   }),
 
-  // Robots
   robots: {
     index:            true,
     follow:           true,
@@ -66,7 +62,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={SITE_CONFIG.language}>
       <head>
-        {/* Google AdSense — replace ca-pub-XXXXX with your real ID */}
         {SITE_CONFIG.googleAdSenseId && (
           <Script
             async
@@ -76,8 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-<body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
-          {/* Google Analytics */}
+      <body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
         {SITE_CONFIG.googleAnalyticsId && (
           <>
             <Script
