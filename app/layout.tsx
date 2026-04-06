@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import type { Metadata } from 'next'
 import "./globals.css" 
 import { SITE_CONFIG } from '../lib/config' 
