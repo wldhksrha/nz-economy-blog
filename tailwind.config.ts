@@ -1,10 +1,13 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  // 1. 적용 범위를 넓혔습니다. (lib, posts 폴더 추가)
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}', // 추가
+    './posts/**/*.md',                // 마크다운 글 디자인 적용 위해 추가
   ],
   theme: {
     extend: {
@@ -52,6 +55,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  // 2. 타이포그래피 플러그인을 활성화합니다. (보통 기본 설치되어 있음)
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 export default config
