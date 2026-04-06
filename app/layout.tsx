@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import "./globals.css" // 경로를 ./globals.css로 깔끔하게 수정했습니다.
-import { SITE_CONFIG } from '../lib/config' // 주석(//)을 풀고 경로를 수정했습니다!
+import "./globals.css" 
+import { SITE_CONFIG } from '../lib/config' // 1. 주석을 풀고 '../' 경로로 수정했습니다.
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Script from 'next/script'
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.author.name }],
   creator:  SITE_CONFIG.author.name,
 
+  // Open Graph
   openGraph: {
     type:        'website',
     locale:      'ko_KR',
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.description,
   },
 
+  // Twitter Card
   twitter: {
     card:  'summary_large_image',
     title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
@@ -72,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
+        {/* 2. 디자인이 깨지지 않게 suppressHydrationWarning을 추가했습니다. */}
         {SITE_CONFIG.googleAnalyticsId && (
           <>
             <Script
