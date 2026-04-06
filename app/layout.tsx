@@ -1,30 +1,24 @@
 import type { Metadata } from 'next'
 import "./globals.css" 
-import { SITE_CONFIG } from '../lib/config' // 1. 주석을 풀고 '../' 경로로 수정했습니다.
+import { SITE_CONFIG } from '../lib/config' 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
-
   title: {
     default:  `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
-
   description: SITE_CONFIG.description,
-
   keywords: [
     '뉴질랜드 경제', '뉴질랜드 부동산', '뉴질랜드 금리',
     '뉴질랜드 환율', '뉴질랜드 이민', 'NZ economy',
     'Reserve Bank of New Zealand', 'RBNZ', 'NZ GDP',
   ],
-
   authors: [{ name: SITE_CONFIG.author.name }],
   creator:  SITE_CONFIG.author.name,
-
-  // Open Graph
   openGraph: {
     type:        'website',
     locale:      'ko_KR',
@@ -33,18 +27,14 @@ export const metadata: Metadata = {
     title:       `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
   },
-
-  // Twitter Card
   twitter: {
     card:  'summary_large_image',
     title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
   },
-
   ...(SITE_CONFIG.googleVerification && {
     verification: { google: SITE_CONFIG.googleVerification },
   }),
-
   robots: {
     index:            true,
     follow:           true,
@@ -56,13 +46,13 @@ export const metadata: Metadata = {
       'max-snippet':       -1,
     },
   },
-
   alternates: { canonical: SITE_CONFIG.url },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={SITE_CONFIG.language}>
+    // ⭐ html 태그에도 suppressHydrationWarning을 추가해서 브라우저가 깐깐하게 구는 걸 막습니다.
+    <html lang={SITE_CONFIG.language} suppressHydrationWarning>
       <head>
         {SITE_CONFIG.googleAdSenseId && (
           <Script
@@ -74,7 +64,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
-        {/* 2. 디자인이 깨지지 않게 suppressHydrationWarning을 추가했습니다. */}
         {SITE_CONFIG.googleAnalyticsId && (
           <>
             <Script
