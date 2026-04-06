@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import "./globals.css" 
-import { SITE_CONFIG } from '../lib/config' // 주석을 풀고 경로를 수정했습니다!
+import "./globals.css" // 경로를 ./globals.css로 깔끔하게 수정했습니다.
+import { SITE_CONFIG } from '../lib/config' // 주석(//)을 풀고 경로를 수정했습니다!
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Script from 'next/script'
