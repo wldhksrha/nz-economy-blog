@@ -1,5 +1,5 @@
 export const dynamic = 'force-static';
-export const revalidate = 0; // 캐시를 쓰지 않고 매번 새로 굽도록 강제
+export const revalidate = false;
 import type { Metadata } from 'next'
 import "./globals.css" 
 import { SITE_CONFIG } from '../lib/config' 
