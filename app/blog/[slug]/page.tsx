@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // ── JSON-LD structured data ────────────────────────────
-function ArticleJsonLd({ post }: { post: Awaited<ReturnType<typeof getPostBySlug>> & object }) {
+function ArticleJsonLd({ post }: { post: any }) {
   const jsonLd = {
     '@context':         'https://schema.org',
     '@type':            'Article',
@@ -76,7 +76,10 @@ function ArticleJsonLd({ post }: { post: Awaited<ReturnType<typeof getPostBySlug
 
 // ── Page component ─────────────────────────────────────
 export default async function PostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug)
+  // params를 안전하게 await 하거나 직접 참조합니다. (Next.js 버전에 따라 다를 수 있음)
+  const { slug } = params;
+  const post = await getPostBySlug(slug)
+  
   if (!post) notFound()
 
   const formattedDate = new Date(post.date).toLocaleDateString('ko-KR', {
@@ -122,7 +125,7 @@ export default async function PostPage({ params }: Props) {
             </h1>
 
             {/* Tags */}
-            {post.tags.length > 0 && (
+            {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-8">
                 {post.tags.map(tag => (
                   <span key={tag} className="text-xs text-stone-500 bg-stone-100 px-2.5 py-1 rounded-full">
@@ -134,9 +137,9 @@ export default async function PostPage({ params }: Props) {
 
             <hr className="border-stone-200 mb-8" />
 
-            {/* Body */}
+            {/* Body: prose 클래스를 추가하여 Tailwind 타이포그래피 플러그인을 강제 적용합니다. */}
             <div
-              className="prose-article"
+              className="prose-article prose prose-stone lg:prose-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
@@ -156,7 +159,6 @@ export default async function PostPage({ params }: Props) {
           <aside className="hidden lg:block">
             <div className="sticky top-24 space-y-6">
 
-              {/* Table of Contents placeholder — enhanced if needed */}
               <div className="bg-white rounded-xl border border-stone-200 p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3">
                   목차
@@ -171,10 +173,8 @@ export default async function PostPage({ params }: Props) {
                 </p>
               </div>
 
-              {/* AdSense slot */}
               <div className="bg-stone-50 rounded-xl border border-dashed border-stone-200 p-4 text-center">
                 <p className="text-xs text-stone-400">광고 영역</p>
-                {/* ins class="adsbygoogle" ... */}
               </div>
             </div>
           </aside>
