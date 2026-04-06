@@ -52,7 +52,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // ⭐ html 태그에도 suppressHydrationWarning을 추가해서 브라우저가 깐깐하게 구는 걸 막습니다.
     <html lang={SITE_CONFIG.language} suppressHydrationWarning>
       <head>
         {SITE_CONFIG.googleAdSenseId && (
@@ -64,7 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className="min-h-screen flex flex-col bg-[#fafaf9]" suppressHydrationWarning>
+      {/* antialiased 클래스를 추가하여 글꼴을 더 부드럽게 만들고, Hydration 방지 속성을 유지합니다. */}
+      <body className="min-h-screen flex flex-col bg-[#fafaf9] antialiased" suppressHydrationWarning>
         {SITE_CONFIG.googleAnalyticsId && (
           <>
             <Script
