@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 interface Props {
-  searchParams: { category?: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export default function BlogPage({ searchParams }: Props) {
