@@ -1,7 +1,7 @@
 export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata } from 'next'
-import "./globals.css" 
+import "@/app/globals.css" 
 import { SITE_CONFIG } from '../lib/config' 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
